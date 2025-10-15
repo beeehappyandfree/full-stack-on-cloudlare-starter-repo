@@ -1,22 +1,10 @@
-import { getDestinationForCountry, getRoutingDestinations } from '@/helpers/route.ops';
+import { getDestinationForCountry, getRoutingDestinations } from '@/helpers/route-ops';
 import { cloudflareInfoSchema } from '@repo/data-ops/zod-schema/links';
 import { LinkClickMessageType } from '@repo/data-ops/zod-schema/queue';
 import { EvaluationScheduler } from '@/durable-objects/valuation-scheduler';
 import { Hono } from 'hono';
 
 export const App = new Hono<{ Bindings: Env }>();
-
-App.get('/do/:name', async (c) => {
-  const name = c.req.param("name")
-  const doId = c.env.EVALUATION_SCHEDULAR.idFromName(name);
-  const stub = c.env.EVALUATION_SCHEDULAR.get(doId);
-  await stub.increment()
-  const count = await stub.getCount()
-  return c.json({
-    count
-  })
-})
-
 
 
 App.get('/:id', async (c) => {
