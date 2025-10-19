@@ -18,9 +18,9 @@ export const evaluationsTrpcRoutes = t.router({
         })
         .optional(),
     )
-    .query(async ({ ctx }) => {
+    .query(async ({  }) => {
       // const evaluations = await getEvaluations(ctx.userInfo.userId);
-      const evaluations = await getEvaluations("asdasd")
+      const evaluations = await getEvaluations("1234567890")
 
       const oldestCreatedAt =
         evaluations.length > 0
